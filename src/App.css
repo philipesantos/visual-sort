@@ -1,0 +1,16 @@
+svg {
+  background-color: #f0f0f0;
+}
+
+.column {
+  fill: #83AF9B;
+  transition: all .5s ease-in-out;
+}
+
+.column.selected {
+  fill: #C8C8A9;
+}
+
+.separator {
+  fill: #f0f0f0;
+}
