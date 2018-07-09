@@ -1,13 +1,19 @@
 import React from 'react';
 import { Provider } from 'react-redux';
-import { createStore } from 'redux';
+import { createStore, applyMiddleware } from 'redux';
+import thunk from 'redux-thunk';
 import rootReducer from './reducers';
 import DrawnCanvas from './containers/DrawnCanvas';
+import ConfiguredNavigationPanel from './containers/ConfiguredNavigationPanel';
+import { ApplicationStatus } from './constants';
 import './App.css';
 
 const App = () => (
-    <Provider store={ createStore(rootReducer, getPreloadedState()) }>
-        <DrawnCanvas />
+    <Provider store={ createStore(rootReducer, getPreloadedState(), applyMiddleware(thunk)) }>
+        <div id="visual-sort">
+            <DrawnCanvas />
+            <ConfiguredNavigationPanel />
+        </div>
     </Provider>
 );
 
@@ -21,7 +27,6 @@ const getPreloadedState = () => {
         const numberId = i + 1;
         numbersById[numberId] = {
             value: numbers[i],
-            selected: false,
         };
         numbersOrderedIds.push(numberId);
         numbersAllIds.push(numberId);
@@ -30,13 +35,20 @@ const getPreloadedState = () => {
         }
     }
     return {
+        status: ApplicationStatus.PAUSED,
+        intervals: {
+            byId: {}
+        },
         numbers: {
             byId: numbersById,
             orderedIds: numbersOrderedIds,
             allIds: numbersAllIds,
             highestNumber: highestNumber,
         },
-        operations: operations,
+        operations: {
+            byIndex: operations,
+            currentIndex: -1,
+        }
     };
 };
 

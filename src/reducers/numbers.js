@@ -1,21 +1,18 @@
-import { merge } from 'lodash';
+import { ActionTypes, OperationTypes } from "../constants";
 
 const numbers = (state = {}, action) => {
     switch (action.type) {
-        case 'SELECT': {
-            const { index } = action;
-            const numberId = state.orderedIds[index];
-            const stateUpdate = {
-                byId: {
-                    [numberId]: {
-                        selected: true,
-                    }
-                },
-            };
-            return merge({}, state, stateUpdate);
+        case ActionTypes.PROCESS_OPERATION: {
+            return processOperation(state, action.operation);
         }
-        case 'SWAP': {
-            const { indexSwapped, indexSwappedBy } = action;
+        default: return state;
+    }
+};
+
+const processOperation = (state, operation) => {
+    switch (operation.type) {
+        case OperationTypes.SWAP: {
+            const { indexSwapped, indexSwappedBy } = operation;
             const orderedIds = state.orderedIds.slice();
             const swappedId = orderedIds[indexSwapped];
             orderedIds[indexSwapped] = orderedIds[indexSwappedBy];
@@ -25,20 +22,9 @@ const numbers = (state = {}, action) => {
                 orderedIds: orderedIds,
             }
         }
-        case 'UNSELECT_ALL': {
-            let stateUpdate = {
-                byId: {}
-            };
-            for (let i = 0; i < state.allIds.length; i++) {
-                let numberId = state.allIds[i];
-                stateUpdate.byId[numberId] = {
-                    selected: false,
-                }
-            }
-            return merge({}, state, stateUpdate);
-        }
-        default: return state;
+        default: 
+            throw new Error('Operation not supported');
     }
-};
+}
 
 export default numbers;

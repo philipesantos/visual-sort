@@ -1,8 +1,9 @@
 import { connect } from 'react-redux'
-import Canvas from '../components/Canvas'
+import NavigationPanel from '../components/NavigationPanel'
+import { ApplicationStatus } from '../constants';
 
 const mapStateToProps = (state) => ({
-    
+    isPlaying: state.status === ApplicationStatus.PLAYING,
 });
 
 const mapDispatchToProps = dispatch => ({
@@ -12,4 +13,4 @@ const mapDispatchToProps = dispatch => ({
 export default connect(
     mapStateToProps,
     mapDispatchToProps
-)(Canvas);
+)(NavigationPanel);
