@@ -5,13 +5,16 @@
 }
 
 #visual-sort > svg {
-  background-color: #f0f0f0;
+  background-color: #ffffff;
+  background-size: 16px 16px;
+  background-image: linear-gradient(to right, #e8e8e8 1px, transparent 1px), 
+                    linear-gradient(to bottom, #e8e8e8 1px, transparent 1px);
   width: 100%;
   flex: 1;
 }
 
 #visual-sort > svg .column {
-  fill: #83AF9B;
+  fill: #3B8686;
   transition: all .5s ease-in-out;
 }
 
@@ -19,20 +22,29 @@
   fill: #C8C8A9;
 }
 
-#visual-sort > svg .separator {
-  fill: #f0f0f0;
-}
-
 #visual-sort #settings-panel {
   padding: 15px;
   text-align: center;
-  color: #C8C8A9;
+  background-color: #0B486B;
 }
 
 #visual-sort #settings-panel a.panel-button {
-  font-size: 24px;
+  font-size: 32px;
   vertical-align: middle;
   cursor: pointer;
-  margin: 0 2px;
-  transition: all .5s ease-in-out;
+  margin: 0 8px;
+  color: #ffffff;
+}
+
+#visual-sort #settings-panel a.panel-button:hover {
+  color: #020e15;
+}
+
+#visual-sort #settings-panel a.panel-button.disabled {
+  color: #083955;
+  cursor: default;
+}
+
+#visual-sort #settings-panel a.panel-button.disabled:hover {
+  color: #083955;
 }

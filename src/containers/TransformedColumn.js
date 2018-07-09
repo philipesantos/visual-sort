@@ -9,7 +9,7 @@ const mapStateToProps = (state, ownProps) => {
     return {
         width: (100 / numbersCount - 1) + '%',
         height: (number.value / highestNumber * 100) + '%',
-        x: (100 / numbersCount * index) + '%',
+        x: (100 / numbersCount * index + 0.5) + '%',
         y: (100 - (number.value / highestNumber * 100)) + '%',
         selected: number.selected,
     };
