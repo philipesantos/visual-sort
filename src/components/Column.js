@@ -7,7 +7,7 @@ const Column = ({x, y, width, height, selected}) => (
 
 const getClassName = (selected) => classNames({
     'column': true,
-    'disabled': selected,
+    'selected': selected,
 });
 
 

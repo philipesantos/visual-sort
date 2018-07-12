@@ -50,6 +50,9 @@ export const previousOperation = () => {
             });
             return Promise.resolve(operation);
         }
+        dispatch({
+            type: ActionTypes.DESELECT_NUMBERS,
+        });
         return Promise.reject(new Error('Out of bounds'));
     };
 }
@@ -70,6 +73,9 @@ export const nextOperation = () => {
             });
             return Promise.resolve(operation);
         }
+        dispatch({
+            type: ActionTypes.DESELECT_NUMBERS,
+        });
         return Promise.reject(new Error('Out of bounds'));
     };
 }

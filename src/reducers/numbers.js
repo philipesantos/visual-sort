@@ -5,6 +5,12 @@ const numbers = (state = {}, action) => {
         case ActionTypes.PROCESS_OPERATION: {
             return processOperation(state, action.operation);
         }
+        case ActionTypes.DESELECT_NUMBERS: {
+            return {
+                ...state,
+                selectedIds: [],
+            }
+        }
         default: return state;
     }
 };
@@ -21,6 +27,15 @@ const processOperation = (state, operation) => {
                 ...state,
                 orderedIds: orderedIds,
             }
+        }
+        case OperationTypes.COMPARE: {
+            const { indexCompared, indexComparedWith } = operation;
+            const comparedId = state.orderedIds[indexCompared];
+            const comparedWithId = state.orderedIds[indexComparedWith];
+            return {
+                ...state,
+                selectedIds: [ comparedId, comparedWithId ],
+            };
         }
         default: 
             throw new Error('Operation not supported');
