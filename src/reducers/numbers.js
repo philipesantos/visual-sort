@@ -5,9 +5,10 @@ const numbers = (state = {}, action) => {
         case ActionTypes.PROCESS_OPERATION: {
             return processOperation(state, action.operation);
         }
-        case ActionTypes.DESELECT_NUMBERS: {
+        case ActionTypes.GO_TO_FIRST_OPERATION: {
             return {
                 ...state,
+                orderedIds: state.allIds.slice(),
                 selectedIds: [],
             }
         }

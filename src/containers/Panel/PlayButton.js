@@ -1,8 +1,8 @@
 import { connect } from 'react-redux';
 import PanelButton from '../../components/PanelButton';
 import { faPlayCircle } from '@fortawesome/free-solid-svg-icons';
-import { applicationPlay } from '../../actions';
 import { ApplicationStatus } from '../../constants';
+import { applicationPlay } from '../../actions';
 
 const mapStateToProps = (state) => ({
     icon: faPlayCircle,

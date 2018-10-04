@@ -3,7 +3,7 @@ import classNames from 'classnames';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 const PanelButton = ({ icon, enabled, onClick }) => (
-    <a className={getClassName(enabled)} onClick={enabled ? onClick: () => {}}>
+    <a className={getClassName(enabled)} onClick={enabled ? () => onClick(): () => {}}>
         <FontAwesomeIcon icon={icon} />
     </a>
 );

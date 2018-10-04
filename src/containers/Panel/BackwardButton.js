@@ -1,24 +1,16 @@
 import { connect } from 'react-redux';
 import PanelButton from '../../components/PanelButton';
 import { faBackward } from '@fortawesome/free-solid-svg-icons';
-import { previousOperation } from '../../actions';
 import { ApplicationStatus } from '../../constants';
-
-const onBackwardClick = (dispatch) => {
-    dispatch(previousOperation())
-        .then(() => {
-            onBackwardClick(dispatch);
-        })
-        .catch(() => {});
-}
+import { goToFirstOperation } from '../../actions';
 
 const mapStateToProps = (state) => ({
     icon: faBackward,
-    enabled: state.status === ApplicationStatus.PAUSED,
+    enabled: state.status === ApplicationStatus.PAUSED && state.operations.processedIdsStack.length > 0,
 });
 
 const mapDispatchToProps = dispatch => ({
-    onClick: () => onBackwardClick(dispatch),
+    onClick: () => dispatch(goToFirstOperation()),
 });
 
 export default connect(
